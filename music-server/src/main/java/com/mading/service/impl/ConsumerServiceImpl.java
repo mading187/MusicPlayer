@@ -28,4 +28,9 @@ public class ConsumerServiceImpl implements ConsumerService {
         return consumerMapper.userOfId(id);
     }
 
+    @Override
+    public boolean updateUserMsg(Consumer consumer) {
+        return consumerMapper.updateUserMsg(consumer) >0 ?true:false;
+    }
+
 }

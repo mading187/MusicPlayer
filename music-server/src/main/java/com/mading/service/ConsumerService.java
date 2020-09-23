@@ -10,4 +10,6 @@ public interface ConsumerService {
     List<Consumer> loginStatus(String username);
 
     List<Consumer> userOfId(Integer id);
+
+    boolean updateUserMsg(Consumer consumer);
 }
