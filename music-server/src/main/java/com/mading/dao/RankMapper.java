@@ -1,5 +1,7 @@
 package com.mading.dao;
 
+import com.mading.pojo.Rank;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -23,4 +25,37 @@ public interface RankMapper {
      */
     @Select("SELECT COALESCE(count(id),0) as num from `rank` where songListId = #{songListId} ;")
     int selectRankNum(Long songListId);
+
+    /**
+     * 给歌单评分
+     * @param rank
+     * @return
+     */
+    @Insert("<script>" +
+            "insert into `rank`\n" +
+            "    <trim prefix=\"(\" suffix=\")\" suffixOverrides=\",\" >\n" +
+            "\n" +
+            "      <if test=\"songListId != null\" >\n" +
+            "        songListId,\n" +
+            "      </if>\n" +
+            "      <if test=\"consumerId != null\" >\n" +
+            "        consumerId,\n" +
+            "      </if>\n" +
+            "      <if test=\"score != null\" >\n" +
+            "        score,\n" +
+            "      </if>\n" +
+            "    </trim>\n" +
+            "    <trim prefix=\"values (\" suffix=\")\" suffixOverrides=\",\" >\n" +
+            "      <if test=\"songListId != null\" >\n" +
+            "        #{songListId,jdbcType=BIGINT},\n" +
+            "      </if>\n" +
+            "      <if test=\"consumerId != null\" >\n" +
+            "        #{consumerId,jdbcType=BIGINT},\n" +
+            "      </if>\n" +
+            "      <if test=\"score != null\" >\n" +
+            "        #{score,jdbcType=INTEGER},\n" +
+            "      </if>\n" +
+            "    </trim>" +
+            "</script>")
+    int insertSelective(Rank rank);
 }
