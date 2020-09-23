@@ -29,6 +29,6 @@ public class SingerController {
     @ResponseBody
     @RequestMapping(value = "/singer"  ,method = RequestMethod.GET)
     public Object allSinger(){
-        System.out.println("获取所有歌手信息");return singerService.allSinger();}
+        return singerService.allSinger();}
 
 }

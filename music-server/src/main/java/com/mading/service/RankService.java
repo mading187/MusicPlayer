@@ -1,4 +1,4 @@
 package com.mading.service;
 
-public class RankService {
+public interface RankService {
 }
