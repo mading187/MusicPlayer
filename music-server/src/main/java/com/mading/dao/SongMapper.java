@@ -11,6 +11,6 @@ import java.util.List;
 @Mapper
 public interface SongMapper {
 
-    @Select("select * from song where d = #{id, jdbcType=INTEGER}")
+    @Select("select * from song where id = #{id, jdbcType=INTEGER}")
     List<Song> songOfId(Integer id);
 }
