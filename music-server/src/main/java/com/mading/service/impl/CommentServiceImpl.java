@@ -22,4 +22,9 @@ public class CommentServiceImpl implements CommentService {
     public boolean addComment(Comment comment) {
         return commentMapper.insertSelective(comment) > 0 ? true:false;
     }
+
+    @Override
+    public boolean updateCommentMsg(Comment comment) {
+        return commentMapper.updateCommentMsg(comment) >0 ?true:false;
+    }
 }

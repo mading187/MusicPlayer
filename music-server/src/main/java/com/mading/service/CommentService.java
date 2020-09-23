@@ -8,4 +8,6 @@ public interface CommentService {
     List<Comment> commentOfSongListId(int parseInt);
 
     boolean addComment(Comment comment);
+
+    boolean updateCommentMsg(Comment comment);
 }

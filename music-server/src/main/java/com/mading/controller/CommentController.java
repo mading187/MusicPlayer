@@ -61,4 +61,28 @@ public class CommentController {
             return jsonObject;
         }
     }
+
+    //    点赞
+    @ResponseBody
+    @RequestMapping(value = "/comment/like", method = RequestMethod.POST)
+    public Object commentOfLike(HttpServletRequest req){
+
+        JSONObject jsonObject = new JSONObject();
+        String id = req.getParameter("id").trim();
+        String up = req.getParameter("up").trim();
+
+        Comment comment = new Comment();
+        comment.setId(Integer.parseInt(id));
+        comment.setUp(Integer.parseInt(up));
+        boolean res = commentService.updateCommentMsg(comment);
+        if (res){
+            jsonObject.put("code", 1);
+            jsonObject.put("msg", "点赞成功");
+            return jsonObject;
+        }else {
+            jsonObject.put("code", 0);
+            jsonObject.put("msg", "点赞失败");
+            return jsonObject;
+        }
+    }
 }
