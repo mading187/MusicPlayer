@@ -1,10 +1,7 @@
 package com.mading.dao;
 
 import com.mading.pojo.Comment;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,5 +22,73 @@ public interface CommentMapper {
             @Result(property = "songListId" , column = "song_list_id"),
             @Result(property = "creatTime" , column = "creat_time")
     })
-    public List<Comment> commentOfSongListId(int songListId);
+    List<Comment> commentOfSongListId(int songListId);
+
+    /**
+     * 对歌曲或者歌单添加评论
+     * @param comment
+     * @return
+     */
+    @Insert("<script>" +
+            "insert into comment\n" +
+            "    <trim prefix=\"(\" suffix=\")\" suffixOverrides=\",\" >\n" +
+            "      <if test=\"id != null\" >\n" +
+            "        id,\n" +
+            "      </if>\n" +
+            "      <if test=\"userId != null\" >\n" +
+            "        user_id,\n" +
+            "      </if>\n" +
+            "      <if test=\"songId != null\" >\n" +
+            "        song_id,\n" +
+            "      </if>\n" +
+            "      <if test=\"songListId != null\" >\n" +
+            "        song_list_id,\n" +
+            "      </if>\n" +
+            "      <if test=\"content != null\" >\n" +
+            "        content,\n" +
+            "      </if>\n" +
+            "      <if test=\"createTime != null\" >\n" +
+            "        create_time,\n" +
+            "      </if>\n" +
+            "      <if test=\"type != null\" >\n" +
+            "        type,\n" +
+            "      </if>\n" +
+            "      <if test=\"up != null\" >\n" +
+            "        up,\n" +
+            "      </if>\n" +
+            "    </trim>\n" +
+            "    <trim prefix=\"values (\" suffix=\")\" suffixOverrides=\",\" >\n" +
+            "      <if test=\"id != null\" >\n" +
+            "        #{id,jdbcType=INTEGER},\n" +
+            "      </if>\n" +
+            "      <if test=\"userId != null\" >\n" +
+            "        #{userId,jdbcType=INTEGER},\n" +
+            "      </if>\n" +
+            "      <if test=\"songId != null\" >\n" +
+            "        #{songId,jdbcType=INTEGER},\n" +
+            "      </if>\n" +
+            "      <if test=\"songListId != null\" >\n" +
+            "        #{songListId,jdbcType=INTEGER},\n" +
+            "      </if>\n" +
+            "      <if test=\"content != null\" >\n" +
+            "        #{content,jdbcType=VARCHAR},\n" +
+            "      </if>\n" +
+            "      <if test=\"createTime != null\" >\n" +
+            "        #{createTime,jdbcType=TIMESTAMP},\n" +
+            "      </if>\n" +
+            "      <if test=\"type != null\" >\n" +
+            "        #{type,jdbcType=TINYINT},\n" +
+            "      </if>\n" +
+            "      <if test=\"up != null\" >\n" +
+            "        #{up,jdbcType=INTEGER},\n" +
+            "      </if>\n" +
+            "    </trim>" +
+            "</script>")
+    @Results({
+            @Result(property = "userId" ,column = "user_id"),
+            @Result(property = "songId" ,column = "song_id"),
+            @Result(property = "songListId" , column = "song_list_id"),
+            @Result(property = "creatTime" , column = "creat_time")
+    })
+    int insertSelective(Comment comment);
 }

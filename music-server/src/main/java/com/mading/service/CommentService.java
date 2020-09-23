@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CommentService {
     List<Comment> commentOfSongListId(int parseInt);
+
+    boolean addComment(Comment comment);
 }

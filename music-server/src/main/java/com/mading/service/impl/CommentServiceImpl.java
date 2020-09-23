@@ -17,4 +17,9 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> commentOfSongListId(int songListId) {
         return commentMapper.commentOfSongListId(songListId);
     }
+
+    @Override
+    public boolean addComment(Comment comment) {
+        return commentMapper.insertSelective(comment) > 0 ? true:false;
+    }
 }
