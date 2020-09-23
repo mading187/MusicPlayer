@@ -1,6 +1,6 @@
 # music-client
 
-> vue.js for user-client
+> A Vue.js project
 
 ## Build Setup
 
