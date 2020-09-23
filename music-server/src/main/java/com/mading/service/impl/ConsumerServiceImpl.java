@@ -33,4 +33,9 @@ public class ConsumerServiceImpl implements ConsumerService {
         return consumerMapper.updateUserMsg(consumer) >0 ?true:false;
     }
 
+    @Override
+    public boolean addUser(Consumer consumer) {
+        return consumerMapper.insertSelective(consumer) >0 ?true:false;
+    }
+
 }

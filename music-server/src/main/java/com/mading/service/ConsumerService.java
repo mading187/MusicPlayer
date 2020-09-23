@@ -12,4 +12,6 @@ public interface ConsumerService {
     List<Consumer> userOfId(Integer id);
 
     boolean updateUserMsg(Consumer consumer);
+
+    boolean addUser(Consumer consumer);
 }

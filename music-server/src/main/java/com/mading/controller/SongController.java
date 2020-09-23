@@ -48,4 +48,11 @@ public class SongController {
         String id = req.getParameter("id");
         return songService.songOfId(Integer.parseInt(id));
     }
+
+    //    返回指定歌手ID的歌曲
+    @RequestMapping(value = "/song/singer/detail", method = RequestMethod.GET)
+    public Object songOfSingerId(HttpServletRequest req){
+        String singerId = req.getParameter("singerId");
+        return songService.songOfSingerId(Integer.parseInt(singerId));
+    }
 }

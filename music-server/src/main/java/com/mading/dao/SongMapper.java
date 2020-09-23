@@ -13,4 +13,7 @@ public interface SongMapper {
 
     @Select("select * from song where id = #{id, jdbcType=INTEGER}")
     List<Song> songOfId(Integer id);
+
+    @Select("select * from song where singer_id = #{singerId, jdbcType=INTEGER}")
+    List<Song> songOfSingerId(Integer singerId);
 }

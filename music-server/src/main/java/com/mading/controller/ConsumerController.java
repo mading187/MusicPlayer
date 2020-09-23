@@ -116,4 +116,65 @@ public class ConsumerController {
             return jsonObject;
         }
     }
+
+    //    添加用户
+    @ResponseBody
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
+    public Object addUser(HttpServletRequest req){
+        JSONObject jsonObject = new JSONObject();
+        String username = req.getParameter("username").trim();
+        String password = req.getParameter("password").trim();
+        String sex = req.getParameter("sex").trim();
+        String phone_num = req.getParameter("phone_num").trim();
+        String email = req.getParameter("email").trim();
+        String birth = req.getParameter("birth").trim();
+        String introduction = req.getParameter("introduction").trim();
+        String location = req.getParameter("location").trim();
+        String avator = req.getParameter("avator").trim();
+
+        if (username.equals("") || username == null){
+            jsonObject.put("code", 0);
+            jsonObject.put("msg", "用户名或密码错误");
+            return jsonObject;
+        }
+        Consumer consumer = new Consumer();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date myBirth = new Date();
+        try {
+            myBirth = dateFormat.parse(birth);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        consumer.setUsername(username);
+        consumer.setPassword(password);
+        consumer.setSex(new Byte(sex));
+        if (phone_num == "") {
+            consumer.setPhoneNum(null);
+        } else{
+            consumer.setPhoneNum(phone_num);
+        }
+
+        if (email == "") {
+            consumer.setEmail(null);
+        } else{
+            consumer.setEmail(email);
+        }
+        consumer.setBirth(myBirth);
+        consumer.setIntroduction(introduction);
+        consumer.setLocation(location);
+        consumer.setAvator(avator);
+        consumer.setCreateTime(new Date());
+        consumer.setUpdateTime(new Date());
+
+        boolean res = consumerService.addUser(consumer);
+        if (res) {
+            jsonObject.put("code", 1);
+            jsonObject.put("msg", "注册成功");
+            return jsonObject;
+        } else {
+            jsonObject.put("code", 0);
+            jsonObject.put("msg", "注册失败");
+            return jsonObject;
+        }
+    }
 }

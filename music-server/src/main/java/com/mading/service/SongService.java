@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface SongService {
     List<Song> songOfId(Integer id );
+
+    List<Song> songOfSingerId(Integer singerId);
 }

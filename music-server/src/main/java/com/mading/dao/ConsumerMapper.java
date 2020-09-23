@@ -1,10 +1,7 @@
 package com.mading.dao;
 
 import com.mading.pojo.Consumer;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -68,4 +65,78 @@ public interface ConsumerMapper {
     int updateUserMsg(Consumer consumer);
 
 
+    @Insert("<script>" +
+            "insert into consumer\n" +
+            "    <trim prefix=\"(\" suffix=\")\" suffixOverrides=\",\" >\n" +
+            "      <if test=\"username != null\" >\n" +
+            "        username,\n" +
+            "      </if>\n" +
+            "      <if test=\"password != null\" >\n" +
+            "        password,\n" +
+            "      </if>\n" +
+            "      <if test=\"sex != null\" >\n" +
+            "        sex,\n" +
+            "      </if>\n" +
+            "      <if test=\"phoneNum != null\" >\n" +
+            "        phone_num,\n" +
+            "      </if>\n" +
+            "      <if test=\"email != null\" >\n" +
+            "        email,\n" +
+            "      </if>\n" +
+            "      <if test=\"birth != null\" >\n" +
+            "        birth,\n" +
+            "      </if>\n" +
+            "      <if test=\"introduction != null\" >\n" +
+            "        introduction,\n" +
+            "      </if>\n" +
+            "      <if test=\"location != null\" >\n" +
+            "        location,\n" +
+            "      </if>\n" +
+            "      <if test=\"avator != null\" >\n" +
+            "        avator,\n" +
+            "      </if>\n" +
+            "      <if test=\"createTime != null\" >\n" +
+            "        create_time,\n" +
+            "      </if>\n" +
+            "      <if test=\"updateTime != null\" >\n" +
+            "        update_time,\n" +
+            "      </if>\n" +
+            "    </trim>\n" +
+            "    <trim prefix=\"values (\" suffix=\")\" suffixOverrides=\",\" >\n" +
+            "      <if test=\"username != null\" >\n" +
+            "        #{username,jdbcType=VARCHAR},\n" +
+            "      </if>\n" +
+            "      <if test=\"password != null\" >\n" +
+            "        #{password,jdbcType=VARCHAR},\n" +
+            "      </if>\n" +
+            "      <if test=\"sex != null\" >\n" +
+            "        #{sex,jdbcType=TINYINT},\n" +
+            "      </if>\n" +
+            "      <if test=\"phoneNum != null\" >\n" +
+            "        #{phoneNum,jdbcType=CHAR},\n" +
+            "      </if>\n" +
+            "      <if test=\"email != null\" >\n" +
+            "        #{email,jdbcType=CHAR},\n" +
+            "      </if>\n" +
+            "      <if test=\"birth != null\" >\n" +
+            "        #{birth,jdbcType=TIMESTAMP},\n" +
+            "      </if>\n" +
+            "      <if test=\"introduction != null\" >\n" +
+            "        #{introduction,jdbcType=VARCHAR},\n" +
+            "      </if>\n" +
+            "      <if test=\"location != null\" >\n" +
+            "        #{location,jdbcType=VARCHAR},\n" +
+            "      </if>\n" +
+            "      <if test=\"avator != null\" >\n" +
+            "        #{avator,jdbcType=VARCHAR},\n" +
+            "      </if>\n" +
+            "      <if test=\"createTime != null\" >\n" +
+            "        #{createTime,jdbcType=TIMESTAMP},\n" +
+            "      </if>\n" +
+            "      <if test=\"updateTime != null\" >\n" +
+            "        #{updateTime,jdbcType=TIMESTAMP},\n" +
+            "      </if>\n" +
+            "    </trim>" +
+            "</script>")
+    int insertSelective(Consumer consumer);
 }
