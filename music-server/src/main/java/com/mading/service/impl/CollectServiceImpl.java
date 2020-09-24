@@ -6,6 +6,8 @@ import com.mading.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CollectServiceImpl implements CollectService {
     @Autowired
@@ -19,5 +21,14 @@ public class CollectServiceImpl implements CollectService {
     @Override
     public boolean existSongId(Integer userId, Integer songId) {
         return collectMapper.existSongId(userId, songId)>0 ? true:false;
+    }
+
+
+
+    @Override
+    public List<Collect> collectionOfUser(int userId)
+
+    {
+        return collectMapper.collectionOfUser(userId);
     }
 }

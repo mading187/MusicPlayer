@@ -74,4 +74,13 @@ public interface CollectMapper {
 
     @Select("select count(*) from collect where user_id = #{userId, jdbcType=INTEGER} and song_id = #{songId, jdbcType=INTEGER} ;")
     int existSongId(@Param("userId") Integer userId, @Param("songId") Integer songId);
+
+    @Select("select * from collect where user_id = #{userId}")
+    @Results({
+            @Result(property = "userId" ,column = "user_id"),
+            @Result(property = "songId" ,column = "song_id"),
+            @Result(property = "songListId" , column = "song_list_id"),
+            @Result(property = "creatTime" , column = "creat_time")
+    })
+    List<Collect> collectionOfUser(Integer userId);
 }

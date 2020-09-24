@@ -58,4 +58,13 @@ public class CollectController {
             return jsonObject;
         }
     }
+
+    //    返回的指定用户ID收藏列表
+    @RequestMapping(value = "/collection/detail", method = RequestMethod.GET)
+    public Object collectionOfUser(HttpServletRequest req){
+        String userId = req.getParameter("userId");
+        return collectService.collectionOfUser(Integer.parseInt(userId));
+    }
+
+
 }
