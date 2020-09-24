@@ -16,4 +16,9 @@ public class SingerServiceImpl implements SingerService {
     public List<Singer> allSinger() {
         return singerMapper.allSinger();
     }
+
+    @Override
+    public List<Singer> singerOfSex(int sex) {
+        return singerMapper.singerOfSex(sex);
+    }
 }

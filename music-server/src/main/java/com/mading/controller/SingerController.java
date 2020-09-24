@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RestController
 public class SingerController {
@@ -31,4 +33,10 @@ public class SingerController {
     public Object allSinger(){
         return singerService.allSinger();}
 
+    //    根据歌手性别查找歌手
+    @RequestMapping(value = "/singer/sex/detail", method = RequestMethod.GET)
+    public Object singerOfSex(HttpServletRequest req){
+        String sex = req.getParameter("sex").trim();
+        return singerService.singerOfSex(Integer.parseInt(sex));
+    }
 }
