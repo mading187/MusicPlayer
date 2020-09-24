@@ -16,4 +16,10 @@ public class SongListServiceImpl implements SongListService {
     public List<SongList> allSongList() {
         return songListMapper.allSongList();
     }
+
+    @Override
+    public List<SongList> likeStyle(String style)
+    {
+        return songListMapper.likeStyle(style);
+    }
 }

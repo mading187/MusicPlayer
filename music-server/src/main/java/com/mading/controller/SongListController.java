@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RestController
 public class SongListController {
@@ -24,9 +26,17 @@ public class SongListController {
         }
     }
 
+    //返回所有歌单
     @RequestMapping(value = "/songList" , method= RequestMethod.GET)
     public Object allSongList(){
         return songListService.allSongList();
+    }
+
+    //    返回指定类型的歌单
+    @RequestMapping(value = "/songList/style/detail", method = RequestMethod.GET)
+    public Object songListOfStyle(HttpServletRequest req){
+        String style = req.getParameter("style").trim();
+        return songListService.likeStyle('%'+ style + '%');
     }
 
 }

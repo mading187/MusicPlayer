@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface SongListService {
     List<SongList> allSongList();
+
+    List<SongList> likeStyle(String style);
 }
